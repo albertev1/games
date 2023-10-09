@@ -1,0 +1,9 @@
+body {
+  background-image: url("background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+color: #000;
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
