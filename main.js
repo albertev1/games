@@ -1,16 +1,16 @@
-// Espera a que se cargue completamente la página
-document.addEventListener("DOMContentLoaded", function () {
-    // Obtén el elemento del tablero por su ID
-    const tablero = document.getElementById("tablero");
+const dado = document.getElementById('dado');
+const lanzarBtn = document.getElementById('lanzar');
 
-    // Verifica si el elemento se encontró correctamente
-    if (tablero) {
-        // Establece el fondo del tablero como la imagen "fondo.jpg"
-        tablero.style.backgroundImage = "url('background.png')";
-        tablero.style.backgroundSize = "cover"; // Ajusta el tamaño del fondo según el contenedor
-    } else {
-        console.error("El elemento del tablero no se encontró en el documento.");
-    }
+const carasDelDado = ['1', '2', '3', '4', '5', '6'];
+let intervalId;
 
-    // Ahora puedes continuar con la lógica de tu juego
+lanzarBtn.addEventListener('click', () => {
+    clearInterval(intervalId);
+    intervalId = setInterval(() => {
+        const caraAleatoria = carasDelDado[Math.floor(Math.random() * carasDelDado.length)];
+        dado.textContent = caraAleatoria;
+    }, 100);
+    setTimeout(() => {
+        clearInterval(intervalId);
+    }, 2000); // Cambia este valor para ajustar la duración de la animación
 });
