@@ -1,16 +1,47 @@
 const dado = document.getElementById('dado');
 const lanzarBtn = document.getElementById('lanzar');
 
-const carasDelDado = ['1', '2', '3', '4', '5', '6'];
+const imagenesDelDado = [
+    'dado1.png',
+    'dado2.png',
+    'dado3.png',
+    'dado4.png',
+    'dado5.png',
+    'dado6.png',
+];
+
 let intervalId;
+let caraVisible = 1; // Inicialmente mostramos la cara 1
 
 lanzarBtn.addEventListener('click', () => {
     clearInterval(intervalId);
-    intervalId = setInterval(() => {
-        const caraAleatoria = carasDelDado[Math.floor(Math.random() * carasDelDado.length)];
-        dado.textContent = caraAleatoria;
-    }, 100);
-    setTimeout(() => {
-        clearInterval(intervalId);
-    }, 2000); // Cambia este valor para ajustar la duración de la animación
+
+    // Ocultar la cara actualmente visible
+    ocultarCara(caraVisible);
+
+    // Obtener una nueva cara aleatoria
+    const caraAleatoria = obtenerCaraAleatoria();
+
+    // Mostrar la nueva cara
+    mostrarCara(caraAleatoria);
+
+    caraVisible = caraAleatoria; // Actualizar la cara actualmente visible
 });
+
+function mostrarCara(cara) {
+    const imagenMostrar = document.querySelector(`#cara${cara}`);
+    if (imagenMostrar) {
+        imagenMostrar.style.display = 'block';
+    }
+}
+
+function ocultarCara(cara) {
+    const imagenOcultar = document.querySelector(`#cara${cara}`);
+    if (imagenOcultar) {
+        imagenOcultar.style.display = 'none';
+    }
+}
+
+function obtenerCaraAleatoria() {
+    return Math.floor(Math.random() * imagenesDelDado.length) + 1;
+}
