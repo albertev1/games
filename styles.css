@@ -15,3 +15,7 @@ color: #000;
     height: 100px;
     border-radius: 50%;
 }
+  /* Ocultar todas las caras excepto la primera al principio */
+.cara.oculta {
+    display: none;
+}
