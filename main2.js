@@ -2,12 +2,12 @@ const dado = document.getElementById('dado');
 const lanzarBtn = document.getElementById('lanzar');
 
 const imagenesDelDado = [
-    'cara1.png',
-    'cara2.png',
-    'cara3.png',
-    'cara4.png',
-    'cara5.png',
-    'cara6.png',
+    'dado1.png',
+    'dado2.png',
+    'dado3.png',
+    'dado4.png',
+    'dado5.png',
+    'dado6.png',
 ];
 
 let intervalId;
