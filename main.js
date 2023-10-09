@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Verifica si el elemento se encontró correctamente
     if (tablero) {
         // Establece el fondo del tablero como la imagen "fondo.jpg"
-        tablero.style.backgroundImage = "url('background.jpg')";
+        tablero.style.backgroundImage = "url('background.png')";
         tablero.style.backgroundSize = "cover"; // Ajusta el tamaño del fondo según el contenedor
     } else {
         console.error("El elemento del tablero no se encontró en el documento.");
