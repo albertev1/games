@@ -1,30 +1,12 @@
-import 'phaser';
+// Espera a que se cargue el contenido de la página
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtén el elemento del tablero por su ID
+    const tablero = document.getElementById("tablero");
 
-const config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    scene: {
-        preload: preload,
-        create: create
-    }
-};
+    // Establece el fondo del tablero como la imagen "fondo.jpg"
+    tablero.style.backgroundImage = "url('games/background.jpg')";
+    tablero.style.backgroundSize = "cover"; // Ajusta el tamaño del fondo según el contenedor
 
-const game = new Phaser.Game(config);
-
-function preload() {
-    // Carga imágenes necesarias aquí (por ejemplo, el fondo de pantalla y la imagen del dado).
-    this.load.image('background', 'images\background.png');
-    this.load.image('dice', './Downloads/dado1.png');
-    // Agregar un mensaje de consola para verificar la carga
-    console.log('Recursos cargados correctamente');
-
-}
-
-function create() {
-    // Agrega el fondo de pantalla
-    this.add.image(400, 300, 'background');
-
-    // Agrega un dado en una posición específica
-    this.add.image(200, 200, 'dice');
-}
+    // Ahora puedes continuar con la lógica de tu juego
+    // Por ejemplo, aquí puedes crear y posicionar las fichas del juego, etc.
+});
