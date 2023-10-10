@@ -1,39 +1,72 @@
-
 const dado = document.getElementById('dado');
 const lanzarBtn = document.getElementById('lanzar');
+const fichas = document.querySelectorAll('.ficha');
 
-const carasDelDado = [1, 2, 3, 4, 5, 6];
+const imagenesDelDado = [
+    'dado1.png',
+    'dado2.png',
+    'dado3.png',
+    'dado4.png',
+    'dado5.png',
+    'dado6.png',
+];
+
 let intervalId;
+let fichaArrastrada = null;
 
 lanzarBtn.addEventListener('click', () => {
     clearInterval(intervalId);
-
-    // Ocultar la cara actualmente visible
-    ocultarCara();
-
-    // Obtener una nueva cara aleatoria
-    const caraAleatoria = obtenerCaraAleatoria();
-
-    // Mostrar la nueva cara
-    mostrarCara(caraAleatoria);
+    intervalId = setInterval(() => {
+        const caraAleatoria = Math.floor(Math.random() * imagenesDelDado.length);
+        mostrarCara(imagenesDelDado[caraAleatoria]);
+    }, 100);
+    setTimeout(() => {
+        clearInterval(intervalId);
+    }, 2000); // Cambia este valor para ajustar la duración de la animación
 });
 
-function mostrarCara(cara) {
-    const imagenMostrar = document.querySelector(`#cara${cara}`);
+function mostrarCara(imagen) {
+    const imagenes = document.querySelectorAll('.cara');
+    imagenes.forEach((imagenElement) => {
+        imagenElement.style.display = 'none';
+    });
+
+    const imagenMostrar = document.querySelector(`[src="${imagen}"]`);
     if (imagenMostrar) {
         imagenMostrar.style.display = 'block';
     }
 }
 
-function ocultarCara() {
-    carasDelDado.forEach((cara) => {
-        const imagenOcultar = document.querySelector(`#cara${cara}`);
-        if (imagenOcultar) {
-            imagenOcultar.style.display = 'none';
-        }
+fichas.forEach((ficha) => {
+    ficha.addEventListener('dragstart', (event) => {
+        fichaArrastrada = event.target;
+        // Agregar un efecto visual durante el arrastre (opcional)
+        fichaArrastrada.style.opacity = '0.6';
     });
-}
 
-function obtenerCaraAleatoria() {
-    return carasDelDado[Math.floor(Math.random() * carasDelDado.length)];
-}
+    ficha.addEventListener('dragend', () => {
+        fichaArrastrada = null;
+        // Restaurar el estilo original al finalizar el arrastre (opcional)
+        ficha.style.opacity = '1';
+    });
+});
+
+document.addEventListener('dragover', (event) => {
+    event.preventDefault();
+});
+
+document.addEventListener('drop', (event) => {
+    event.preventDefault();
+    
+    if (fichaArrastrada) {
+        const dropTarget = event.target.closest('.ficha');
+        
+        if (dropTarget) {
+            // Intercambiar las fichas si se soltó sobre otra ficha
+            const temp = { ...fichaArrastrada.style };
+            
+            fichaArrastrada.style.cssText = dropTarget.style.cssText;
+            dropTarget.style.cssText = temp.cssText;
+        }
+    }
+});
