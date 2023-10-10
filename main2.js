@@ -1,5 +1,7 @@
+const dado = document.getElementById('dado');
 const lanzarBtn = document.getElementById('lanzar');
 const fichas = document.querySelectorAll('.ficha');
+
 const imagenesDelDado = [
     'dado1.png',
     'dado2.png',
@@ -44,13 +46,4 @@ fichas.forEach((ficha) => {
 
     ficha.addEventListener('dragend', () => {
         fichaArrastrada = null;
-        // Restaurar el estilo original al finalizar el arrastre (opcional)
-        ficha.style.opacity = '1';
-    });
-});
-
-document.addEventListener('dragover', (event) => {
-    event.preventDefault();
-});
-
-document.addEventListener('drop', (event) => {
+        // Restaurar el estilo original al finalizar el arrastre
