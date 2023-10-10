@@ -42,9 +42,7 @@ color: #000;
     height: 50px;
     background-color: #3498db;
     margin: 5px;
-    cursor: grab;
+  cursor: move;
 }
 
-.ficha:active {
-    cursor: grabbing;
-}
+
