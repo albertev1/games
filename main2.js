@@ -1,5 +1,6 @@
 const dado = document.getElementById('dado');
 const lanzarBtn = document.getElementById('lanzar');
+ const fichas = document.querySelectorAll('.ficha');
 
 const imagenesDelDado = [
     'dado1.png',
@@ -28,6 +29,42 @@ function mostrarCara(imagen) {
     imagenes.forEach((imagenElement) => {
         imagenElement.style.display = 'none';
     });
+
+
+   
+
+let fichaArrastrada = null;
+
+fichas.forEach((ficha) => {
+    ficha.addEventListener('dragstart', (event) => {
+        fichaArrastrada = event.target;
+    });
+
+    ficha.addEventListener('dragend', () => {
+        fichaArrastrada = null;
+    });
+});
+
+document.addEventListener('dragover', (event) => {
+    event.preventDefault();
+});
+
+document.addEventListener('drop', (event) => {
+    event.preventDefault();
+    
+    if (fichaArrastrada) {
+        const dropTarget = event.target.closest('.ficha');
+        
+        if (dropTarget) {
+            // Intercambiar las fichas si se soltó sobre otra ficha
+            const temp = { ...fichaArrastrada.style };
+
+            fichaArrastrada.style.cssText = dropTarget.style.cssText;
+            dropTarget.style.cssText = temp.cssText;
+        }
+    }
+});
+
 
     const imagenMostrar = document.querySelector(`[src="${imagen}"]`);
     if (imagenMostrar) {
