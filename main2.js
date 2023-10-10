@@ -11,7 +11,6 @@ const imagenesDelDado = [
 ];
 
 let intervalId;
-let fichaArrastrada = null;
 
 lanzarBtn.addEventListener('click', () => {
     clearInterval(intervalId);
@@ -35,6 +34,7 @@ function mostrarCara(imagen) {
         imagenMostrar.style.display = 'block';
     }
 }
+
 
 // Función para detectar cuando se arrastra una ficha
 function onDragStart(event) {
