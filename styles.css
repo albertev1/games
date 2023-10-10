@@ -44,5 +44,9 @@ color: #000;
     margin: 5px;
   cursor: move;
 }
-
+.casilla {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+}
 
