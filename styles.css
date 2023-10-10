@@ -13,6 +13,7 @@ color: #000;
     height: 100px;
     border-radius: 50%;
     position: absolute;
+    margin:20px, auto;
     top: 40;
     left: 20;
     display: none;
