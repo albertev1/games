@@ -1,6 +1,5 @@
 const dado = document.getElementById('dado');
 const lanzarBtn = document.getElementById('lanzar');
-const fichas = document.querySelectorAll('.ficha');
 
 const imagenesDelDado = [
     'dado1.png',
@@ -37,36 +36,40 @@ function mostrarCara(imagen) {
     }
 }
 
-fichas.forEach((ficha) => {
-    ficha.addEventListener('dragstart', (event) => {
-        fichaArrastrada = event.target;
-        // Agregar un efecto visual durante el arrastre (opcional)
-        fichaArrastrada.style.opacity = '0.6';
-    });
+// Función para detectar cuando se arrastra una ficha
+function onDragStart(event) {
+  // Obtenemos la ficha que se está arrastrando
+  const ficha = event.target;
 
-    ficha.addEventListener('dragend', () => {
-        fichaArrastrada = null;
-        // Restaurar el estilo original al finalizar el arrastre (opcional)
-        ficha.style.opacity = '1';
-    });
+  // Almacenamos la posición inicial de la ficha
+  ficha.startX = event.clientX;
+  ficha.startY = event.clientY;
+}
+
+// Función para actualizar la posición de la ficha mientras se arrastra
+function onDrag(event) {
+  // Obtenemos la ficha que se está arrastrando
+  const ficha = event.target;
+
+  // Calculamos la nueva posición de la ficha
+  ficha.style.left = event.clientX - ficha.startX + "px";
+  ficha.style.top = event.clientY - ficha.startY + "px";
+}
+
+// Función para detener el arrastre de la ficha
+function onDragEnd(event) {
+  // Obtenemos la ficha que se está arrastrando
+  const ficha = event.target;
+
+  // Eliminamos la información de la posición inicial de la ficha
+  ficha.startX = null;
+  ficha.startY = null;
+}
+
+// Agregamos los eventos de arrastrar y soltar a las fichas
+document.querySelectorAll(".ficha").forEach((ficha) => {
+  ficha.addEventListener("dragstart", onDragStart);
+  ficha.addEventListener("drag", onDrag);
+  ficha.addEventListener("dragend", onDragEnd);
 });
 
-document.addEventListener('dragover', (event) => {
-    event.preventDefault();
-});
-
-document.addEventListener('drop', (event) => {
-    event.preventDefault();
-    
-    if (fichaArrastrada) {
-        const dropTarget = event.target.closest('.ficha');
-        
-        if (dropTarget) {
-            // Intercambiar las fichas si se soltó sobre otra ficha
-            const temp = { ...fichaArrastrada.style };
-            
-            fichaArrastrada.style.cssText = dropTarget.style.cssText;
-            dropTarget.style.cssText = temp.cssText;
-        }
-    }
-});
