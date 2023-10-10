@@ -30,9 +30,7 @@ function mostrarCara(imagen) {
         imagenElement.style.display = 'none';
     });
 
-
    
-
 let fichaArrastrada = null;
 
 fichas.forEach((ficha) => {
@@ -65,9 +63,50 @@ document.addEventListener('drop', (event) => {
     }
 });
 
+ 
+
 
     const imagenMostrar = document.querySelector(`[src="${imagen}"]`);
     if (imagenMostrar) {
         imagenMostrar.style.display = 'block';
     }
 }
+
+const fichas = document.querySelectorAll('.ficha');
+
+let fichaArrastrada = null;
+
+fichas.forEach((ficha) => {
+    ficha.addEventListener('dragstart', (event) => {
+        fichaArrastrada = event.target;
+        // Agregar un efecto visual durante el arrastre (opcional)
+        fichaArrastrada.style.opacity = '0.6';
+    });
+
+    ficha.addEventListener('dragend', () => {
+        fichaArrastrada = null;
+        // Restaurar el estilo original al finalizar el arrastre (opcional)
+        ficha.style.opacity = '1';
+    });
+});
+
+document.addEventListener('dragover', (event) => {
+    event.preventDefault();
+});
+
+document.addEventListener('drop', (event) => {
+    event.preventDefault();
+    
+    if (fichaArrastrada) {
+        const dropTarget = event.target.closest('.ficha');
+        
+        if (dropTarget) {
+            // Intercambiar las fichas si se soltó sobre otra ficha
+            const temp = { ...fichaArrastrada.style };
+            
+            fichaArrastrada.style.cssText = dropTarget.style.cssText;
+            dropTarget.style.cssText = temp.cssText;
+        }
+    }
+});
+
