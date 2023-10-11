@@ -1,17 +1,26 @@
+# Clona el repositorio de GitHub de Phaser
+git clone https://github.com/photonstorm/phaser3.git
+
+# Agrega el código de la biblioteca a tu proyecto
+cd phaser3
+cp dist/phaser.min.js ..
+
+# Crea un nuevo archivo index.html
+touch index.html
+
+# Agrega el código HTML al archivo index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Juego de tablero</ti1tle>
-
-  <link rel="stylesheet" href="style.css">
-  <script src="phaser.min.js"></script>
+  <title>Juego de tablero</title>
 </head>
 <body>
 
   <canvas id="canvas" width="800" height="600"></canvas>
 
+  <script src="phaser.min.js"></script>
   <script>
     // Crear el juego
     const game = new Phaser.Game(800, 600, Phaser.AUTO);
@@ -22,7 +31,7 @@
 
     // Crear la ficha
     const ficha1 = new Phaser.Sprite(game, 100, 100);
-    ficha1.setTexture('ficha1.png');
+    ficha1.setTexture('assets/ficha.png');
     ficha1.setScale(0.5);
 
     // Agregar el tablero al juego
@@ -38,5 +47,6 @@
     // Iniciar el juego
     game.start();
   </script>
+
 </body>
 </html>
