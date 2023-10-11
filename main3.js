@@ -11,8 +11,8 @@ var isMove=false;
 
 var canvasLimites=canvas.getBoundingClientRect();
 canvas.addEventListener('mousedown',cambiarEstado, false);
-canvas.addEventListener('mouseup',cambiarEstado,fa lse);
-canvas.addEventListener('mousemove',moverImagen,fa lse);
+canvas.addEventListener('mouseup',cambiarEstado,false);
+canvas.addEventListener('mousemove',moverImagen,false);
 canvas.style.cursor="hand";
 
 function moverImagen(){
