@@ -3,17 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mover imagen con el ratón</title>
+  <title>Juego de tablero</ti1tle>
 
   <link rel="stylesheet" href="style.css">
+  <script src="phaser.min.js"></script>
 </head>
 <body>
 
-  <div class="tablero">
-    <img src="ficha1.png" class="ficha" draggable="true">
-  </div>
+  <canvas id="canvas" width="800" height="600"></canvas>
 
-  <script src="script.js"></script>
+  <script>
+    // Crear el juego
+    const game = new Phaser.Game(800, 600, Phaser.AUTO);
 
+    // Crear el tablero
+    const tablero = new Phaser.Rectangle(0, 0, 800, 600);
+    tablero.setFill('#ffffff');
+
+    // Crear la ficha
+    const ficha1 = new Phaser.Sprite(game, 100, 100);
+    ficha1.setTexture('ficha1.png');
+    ficha1.setScale(0.5);
+
+    // Agregar el tablero al juego
+    game.add.existing(tablero);
+
+    // Agregar la ficha al juego
+    game.add.existing(ficha1);
+
+    // Mover la ficha
+    ficha1.x = 100;
+    ficha1.y = 100;
+
+    // Iniciar el juego
+    game.start();
+  </script>
 </body>
 </html>
