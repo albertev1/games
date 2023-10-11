@@ -1,67 +1,50 @@
-// Función para detectar cuando se arrastra una ficha
-function onDragStart(event) {
-  // Obtenemos la ficha que se está arrastrando
-  const ficha = event.target;
+var ficha = new Image();
+ficha.onload = function(){
+contexto.drawImage(ficha,425,428);
+}
+ficha.src = 'ficha1.png';
 
-  // Almacenamos la posición inicial de la ficha
-  ficha.startX = event.clientX;
-  ficha.startY = event.clientY;
+(Asi es como dibujo todas las fichas repitiendo el codigo 16 veces )
+
+var actualPos;
+var isMove=false;
+
+var canvasLimites=canvas.getBoundingClientRect();
+canvas.addEventListener('mousedown',cambiarEstado, false);
+canvas.addEventListener('mouseup',cambiarEstado,fa lse);
+canvas.addEventListener('mousemove',moverImagen,fa lse);
+canvas.style.cursor="hand";
+
+function moverImagen(){
+
+if(isMove){
+actualPos=obtenerCoordenadas(event);
+// contexto.clearRect(0,0,canvas.width,canvas.height) ;
+contexto.drawImage(fichav1,actualPos.x-(fichav1.width/2),actualPos.y-(fichav1.height/2));
 }
 
-// Función para actualizar la posición de la ficha mientras se arrastra
-function onDrag(event) {
-  // Obtenemos la ficha que se está arrastrando
-  const ficha = event.target;
-
-  // Calculamos la nueva posición de la ficha
-  ficha.style.left = event.clientX - ficha.startX + "px";
-  ficha.style.top = event.clientY - ficha.startY + "px";
 }
 
-// Función para detener el arrastre de la ficha
-function onDragEnd(event) {
-  // Obtenemos la ficha que se está arrastrando
-  const ficha = event.target;
-
-  // Eliminamos la información de la posición inicial de la ficha
-  ficha.startX = null;
-  ficha.startY = null;
+function cambiarEstado(){
+isMove=!isMove;
+actualPos=obtenerCoordenadas(event);
 }
 
-// Agregamos los eventos de arrastrar y soltar a las fichas
-document.querySelectorAll(".ficha").forEach((ficha) => {
-  ficha.addEventListener("dragstart", onDragStart);
-  ficha.addEventListener("drag", onDrag);
-  ficha.addEventListener("dragend", onDragEnd);
-});
+function obtenerCoordenadas(event){
+var posX;
+var posY;
 
-// Función para comprobar si la ficha puede moverse a una nueva casilla
-function canMove(ficha, nuevaCasilla) {
-  // Obtenemos la posición de la ficha
-  const fichaX = ficha.getBoundingClientRect().left;
-  const fichaY = ficha.getBoundingClientRect().top;
-
-  // Obtenemos la posición de la nueva casilla
-  const nuevaCasillaX = nuevaCasilla.getBoundingClientRect().left;
-  const nuevaCasillaY = nuevaCasilla.getBoundingClientRect().top;
-
-  // Calculamos la distancia entre la ficha y la nueva casilla
-  const distanciaX = fichaX - nuevaCasillaX;
-  const distanciaY = fichaY - nuevaCasillaY;
-
-  // Devolvemos true si la ficha se puede mover a la nueva casilla
-  return distanciaX <= 100 && distanciaY <= 100;
+if (event.pageX || event.pageY) {
+posX = event.pageX- canvasLimites.left;
+posY = event.pageY- canvasLimites.top;
+}
+else {
+posX = event.clientX - canvasLimites.left;
+posY = event.clientY - canvasLimites.top;
 }
 
-// Función para mover la ficha a una nueva casilla
-function moveFicha(ficha, nuevaCasilla) {
-  // Comprobamos si la ficha se puede mover a la nueva casilla
-  if (canMove(ficha, nuevaCasilla)) {
-    // Movemos la ficha a la nueva casilla
-    ficha.style.left = nuevaCasilla.getBoundingClientRect().left + "px";
-    ficha.style.top = nuevaCasilla.getBoundingClientRect().top + "px";
-  }
+return {
+x:posX,
+y:posY
+};
 }
-
-// Función que se ejecuta cuando se suelta la ficha
-function onDragEnd(event) {
