@@ -37,7 +37,7 @@ function mostrarCara(imagen) {
 
 
 // Definimos la imagen que vamos a arrastrar
-const image = document.querySelector("img");
+const image = document.querySelectorAll("img");
 
 // Añadimos un evento de arrastre a la imagen
 image.addEventListener("mousedown", (event) => {
