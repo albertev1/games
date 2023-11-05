@@ -36,40 +36,31 @@ function mostrarCara(imagen) {
 }
 
 
-// Función para detectar cuando se arrastra una ficha
-function onDragStart(event) {
-  // Obtenemos la ficha que se está arrastrando
-  const ficha = event.target;
+// Definimos la imagen que vamos a arrastrar
+const image = document.querySelector("img");
 
-  // Almacenamos la posición inicial de la ficha
-  ficha.startX = event.clientX;
-  ficha.startY = event.clientY;
-}
+// Añadimos un evento de arrastre a la imagen
+image.addEventListener("mousedown", (event) => {
+    // Guardamos la posición inicial del cursor
+    const initialX = event.clientX;
+    const initialY = event.clientY;
 
-// Función para actualizar la posición de la ficha mientras se arrastra
-function onDrag(event) {
-  // Obtenemos la ficha que se está arrastrando
-  const ficha = event.target;
-
-  // Calculamos la nueva posición de la ficha
-  ficha.style.left = event.clientX - ficha.startX + "px";
-  ficha.style.top = event.clientY - ficha.startY + "px";
-}
-
-// Función para detener el arrastre de la ficha
-function onDragEnd(event) {
-  // Obtenemos la ficha que se está arrastrando
-  const ficha = event.target;
-
-  // Eliminamos la información de la posición inicial de la ficha
-  ficha.startX = null;
-  ficha.startY = null;
-}
-
-// Agregamos los eventos de arrastrar y soltar a las fichas
-document.querySelectorAll(".ficha").forEach((ficha) => {
-  ficha.addEventListener("dragstart", onDragStart);
-  ficha.addEventListener("drag", onDrag);
-  ficha.addEventListener("dragend", onDragEnd);
+    // Iniciamos el evento de arrastre
+    event.preventDefault();
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
 });
 
+// Evento que se produce cuando el cursor se mueve
+function onMouseMove(event) {
+    // Actualizamos la posición de la imagen
+    image.style.left = event.clientX - initialX;
+    image.style.top = event.clientY - initialY;
+}
+
+// Evento que se produce cuando se suelta el botón del ratón
+function onMouseUp() {
+    // Eliminamos el evento de arrastre
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+}
