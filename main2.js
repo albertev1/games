@@ -64,3 +64,36 @@ function onMouseUp() {
     document.removeEventListener("mousemove", onMouseMove);
     document.removeEventListener("mouseup", onMouseUp);
 }
+// Definimos la imagen que vamos a mover
+const image = document.querySelector("#ficha1");
+
+// Obtenemos un número aleatorio entre 1 y 6
+const number = Math.floor(Math.random() * 6) + 1;
+
+// Cambiamos la posición de la imagen según el número obtenido
+switch (number) {
+    case 1:
+        image.style.left = "100px";
+        image.style.top = "100px";
+        break;
+    case 2:
+        image.style.left = "200px";
+        image.style.top = "100px";
+        break;
+    case 3:
+        image.style.left = "300px";
+        image.style.top = "100px";
+        break;
+    case 4:
+        image.style.left = "100px";
+        image.style.top = "200px";
+        break;
+    case 5:
+        image.style.left = "200px";
+        image.style.top = "200px";
+        break;
+    case 6:
+        image.style.left = "300px";
+        image.style.top = "200px";
+        break;
+}
